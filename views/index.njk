@@ -4,9 +4,17 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="./style.css">
    <title>Maioridade</title>
 </head>
-<body>
-   <h1>Olá Mundo!</h1>
+<body class="container">
+   <h1 class="title">Verificador de maioridade!</h1>
+   <section>
+      <form action="/check" method="GET" class="formContainer">
+         <h2 class="subtitle">Informe sua idade</h2>
+         <input type="text" name="idade" id="idade" placeholder="Idade">
+         <input type="submit" value="Acessar" class="btn">
+      </form>
+   </section>
 </body>
 </html>

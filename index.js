@@ -4,6 +4,7 @@ const nunjucks = require('nunjucks')
 const app = express()
 
 app.set('view engine', 'njk')
+app.use(express.static('public'))
 
 nunjucks.configure('views', {
   // Inicia o live reaload
@@ -14,10 +15,16 @@ nunjucks.configure('views', {
   autoescape: true
 })
 
-app.use((req, res, nex) => {
-  console.log('middleware')
+const checkIdade = (req, res, nex) => {
+  const idade = parseInt(req.query.idade)
+  if (isNaN(idade)) {
+    return res.redirect('/')
+  }
+
+  req.idade = idade
+
   nex()
-})
+}
 
 app.get('/', (req, res) => {
   res.render('index')
@@ -29,6 +36,14 @@ app.get('/maioridade', (req, res) => {
 
 app.get('/menoridade', (req, res) => {
   res.render('menoridade')
+})
+
+app.get('/check', checkIdade, (req, res) => {
+  if (req.idade < 18) {
+    res.redirect('/menoridade')
+  } else {
+    res.redirect('/maioridade')
+  }
 })
 
 app.listen(3000, () => {
