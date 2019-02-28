@@ -14,6 +14,11 @@ nunjucks.configure('views', {
   autoescape: true
 })
 
+app.use((req, res, nex) => {
+  console.log('middleware')
+  nex()
+})
+
 app.get('/', (req, res) => {
   res.render('index')
 })
